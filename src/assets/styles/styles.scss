@@ -1,1 +1,4 @@
 // Write your overrides
+@use "vuetify/styles" as * with (
+  $body-font-family: "Poppins",
+);
