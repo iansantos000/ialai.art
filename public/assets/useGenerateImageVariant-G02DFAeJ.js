@@ -1,0 +1,1 @@
+import{aN as u,aW as i,V as f}from"./index-7cdlBwO-.js";const c="/assets/tree1-BgCqMC4A.png",m=(e,a,n,o,r=!1)=>{const t=u(),{global:s}=i();return f(()=>s.name.value==="light"?t.skin==="bordered"&&r?n:e:s.name.value==="dark"?t.skin==="bordered"&&r?o:a:e)};export{c as t,m as u};

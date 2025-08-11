@@ -20,9 +20,12 @@ declare module 'vue-router/auto-routes' {
   export interface RouteNamedMap {
     'root': RouteRecordInfo<'root', '/', Record<never, never>, Record<never, never>>,
     '$error': RouteRecordInfo<'$error', '/:error(.*)', { error: ParamValue<true> }, { error: ParamValue<false> }>,
+    'bklogin': RouteRecordInfo<'bklogin', '/BK/login', Record<never, never>, Record<never, never>>,
     'instagram-showcase-register': RouteRecordInfo<'instagram-showcase-register', '/instagram-showcase-register', Record<never, never>, Record<never, never>>,
     'instagramshow-case': RouteRecordInfo<'instagramshow-case', '/instagramshow-case', Record<never, never>, Record<never, never>>,
     'login': RouteRecordInfo<'login', '/login', Record<never, never>, Record<never, never>>,
+    'recuperar-senha': RouteRecordInfo<'recuperar-senha', '/recuperar-senha', Record<never, never>, Record<never, never>>,
+    'registrar': RouteRecordInfo<'registrar', '/registrar', Record<never, never>, Record<never, never>>,
     'second-page': RouteRecordInfo<'second-page', '/second-page', Record<never, never>, Record<never, never>>,
   }
 }
