@@ -1,0 +1,46 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null && request.auth.token.admin == true;
+    }
+
+    // Configurações do site (cores, logos, contatos): público lê, admin escreve
+    match /settings/{doc} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Produtos: público só vê publicados
+    match /products/{id} {
+      allow read: if resource.data.published == true || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // Blog
+    match /posts/{id} {
+      allow read: if resource.data.published == true || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // Leads: qualquer visitante cria (com campos validados), só admin lê
+    match /leads/{id} {
+      allow create: if request.resource.data.keys().hasOnly(['name','email','phone','source','createdAt'])
+                    && request.resource.data.email is string
+                    && request.resource.data.email.size() < 200;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Área de membros: conteúdo só para logados
+    match /memberContent/{id} {
+      allow read: if request.auth != null;
+      allow write: if isAdmin();
+    }
+
+    match /users/{uid} {
+      allow read, write: if request.auth != null && request.auth.uid == uid
+                         && !('admin' in request.resource.data);
+      allow read: if isAdmin();
+    }
+  }
+}
